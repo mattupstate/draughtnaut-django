@@ -1,3 +1,4 @@
+import urllib, hashlib
 from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -41,8 +42,14 @@ def profile(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/users/login/?next=%s' % request.path)
     
+    size = 100
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(request.user.email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'s':str(size)})
+
+    
     return render_to_response('users/user-profile.html', {
         'profile': request.user.get_profile(),
+        'gravatar_url': gravatar_url,
     }, context_instance=RequestContext(request))
 
 def public_profile(request, id_or_username):
@@ -54,8 +61,13 @@ def public_profile(request, id_or_username):
         except:
             raise Http404
     
-    return render_to_response('users/user-profile.html', {
-        'profile': user.get_profile()
+    size = 100
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(user.email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'s':str(size)})
+    
+    return render_to_response('users/public-profile.html', {
+        'profile': user.get_profile(),
+        'gravatar_url': gravatar_url,
     }, context_instance=RequestContext(request))
 
 class SignUpForm(forms.Form):

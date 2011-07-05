@@ -1,6 +1,7 @@
 {% extends "default.html" %}
 {% block title %}Your Profile{% endblock %}
 {% block content %}
+<img src="{{ gravatar_url }}"/>
 <h2>{{ profile.user.username }}</h2>
 <p>
   First Name: {{ profile.user.first_name }}<br/>
