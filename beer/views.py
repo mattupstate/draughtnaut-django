@@ -39,18 +39,16 @@ class BeerForm(forms.Form):
                 widget=forms.TextInput(attrs=TEXT_ATTRS))
     style_auto = forms.CharField(label=_('Style'),
                 widget=forms.TextInput(attrs=TEXT_ATTRS))
-import logging
+
 # Add a beer form handler
 def beer_add(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/users/login/?next=%s' % request.path)
     
     if request.method == 'POST':
-        logging.debug('were posting!')
         form = BeerForm(request.POST)
         logging.debug(form.is_valid())
         if form.is_valid():
-            logging.debug('YOOOOOO')
             b = Beer(name = form.cleaned_data['name'],
                      abv = form.cleaned_data['abv'],
                      style = BeerStyle.objects.get(pk=form.cleaned_data['style']),
@@ -58,7 +56,6 @@ def beer_add(request):
             b.save()
             return HttpResponseRedirect('/beer/%s' % b.id)
     else:
-        logging.debug('were NOT posting!')
         form = BeerForm()
         
     return render_to_response('beer/beer-add.html', {
