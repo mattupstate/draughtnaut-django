@@ -8,8 +8,12 @@
   {{ venue.address1 }}<br/>
   {% if venue.address2 %}{{ venue.address2 }}<br/>{% endif %}
   {{ venue.city }}, {{ venue.state }} {{ venue.post_code }}<br/>
-  {{ venue.phone }}<br/>
-  {{ venue.website }}<br/>
+  {% if venue.phone %}{{ venue.phone }}<br/>{% endif %}
+  {% if venue.website %}{{ venue.website }}<br/>{% endif %}
+</p>
+<p>
+  <img src="http://maps.google.com/maps/api/staticmap?center=${venue.address}&zoom=14&size=256x256&maptype=roadmap
+&markers=color:red|color:red|label:A|{{ venue.address1 }},{{ venue.city }},{{ venue.state }},{{ venue.post_code }},{{ venue.country }}&sensor=false"/>
 </p>
 {% if beer_list %}
 <h3>Beer Brewed Here</h3>
