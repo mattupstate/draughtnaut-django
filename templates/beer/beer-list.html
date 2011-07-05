@@ -1,0 +1,14 @@
+{% extends "default.html" %}
+{% block title %}All Beer{% endblock %}
+{% block content %}
+  <h2>Beer {% if user.is_authenticated %}[<a href="/beer/add">Add</a>]{% endif %}</h2>
+  {% if beer_list %}
+    <ul>
+    {% for beer in beer_list %}
+      <li><a href="/beer/{{ beer.id }}/">{{ beer.name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No beer! What'll we do?!</p>
+  {% endif %}
+{% endblock %}

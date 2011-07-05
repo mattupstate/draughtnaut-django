@@ -1,0 +1,20 @@
+{% extends "default.html" %}
+{% block title %}{{ venue.name }}{% endblock %}
+{% block content %}
+<h2>{{ venue.name }}</h2>
+<p>
+  {{ venue.address1 }}<br/>
+  {% if venue.address2 %}{{ venue.address2 }}<br/>{% endif %}
+  {{ venue.city }}, {{ venue.state }} {{ venue.post_code }}<br/>
+  {{ venue.phone }}<br/>
+  {{ venue.website }}<br/>
+</p>
+{% if beer_list %}
+<h3>Beer</h3>
+<ul>
+{% for beer in beer_list %}
+  <li><a href="/beer/{{ beer.slug }}/">{{ beer.name }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

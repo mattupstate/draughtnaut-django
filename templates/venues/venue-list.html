@@ -1,0 +1,14 @@
+{% extends "default.html" %}
+{% block title %}All Venues{% endblock %}
+{% block content %}
+  <h2>Venues</h2>
+  {% if venue_list %}
+    <ul>
+    {% for venue in venue_list %}
+      <li><a href="/venues/{{ venue.slug }}/">{{ venue.name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No venues!</p>
+  {% endif %}
+{% endblock %}

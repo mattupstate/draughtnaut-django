@@ -1,0 +1,14 @@
+{% extends "default.html" %}
+{% block title %}Venue Types{% endblock %}
+{% block content %}
+  <h2>Venue Types</h2>
+  {% if type_list %}
+    <ul>
+    {% for type in type_list %}
+      <li><a href="/venues/types/{{ type.slug }}/">{{ type.name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No venue types.</p>
+  {% endif %}
+{% endblock %}

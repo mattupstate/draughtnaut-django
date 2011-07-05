@@ -1,0 +1,22 @@
+{% extends "default.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<h2>Sign Up for DraughtNaut</h2>
+<form method="post" action="/users/signup/">
+  {% csrf_token %}
+  <fieldset>
+  {{ form.non_field_errors }}
+  {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+  {% endfor %}
+  {% for field in form.visible_fields %}
+  <p>
+    {{ field.errors }}
+    {{ field.label_tag }}<br/>
+    {{ field }}
+  </p>
+  {% endfor %}
+  <p><button type="submit"/>Sign Up</button></p>
+  </fieldset>
+</form>
+{% endblock %}

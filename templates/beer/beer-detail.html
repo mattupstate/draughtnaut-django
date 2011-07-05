@@ -1,0 +1,13 @@
+{% extends "default.html" %}
+{% block title %}{{ beer.name }}{% endblock %}
+{% block content %}
+  <h2>{{ beer }}</h2>
+  <p>
+    <strong>{{ beer.brewery.name }}</strong><br/>
+    {{ beer.brewery.state }}, {{ beer.brewery.country }}
+  </p>
+  <p>
+    Style: {{ beer.style.name }}<br/>
+    ABV: {{ beer.abv }}%
+  </p>
+{% endblock %}

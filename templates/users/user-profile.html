@@ -1,0 +1,15 @@
+{% extends "default.html" %}
+{% block title %}Your Profile{% endblock %}
+{% block content %}
+<h2>{{ profile.user.username }}</h2>
+<p>
+  First Name: {{ profile.user.first_name }}<br/>
+  Last Name: {{ profile.user.last_name }}<br/>
+  Email: {{ profile.user.email }}<br/>
+  Last Login: {{ profile.user.last_login }}<br/>
+  Joined: {{ profile.user.date_joined }}<br/>
+</p>
+<h3>Tips</h3>
+<p>Tips added by user</p>
+
+{% endblock %}

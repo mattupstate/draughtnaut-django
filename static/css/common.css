@@ -1,0 +1,38 @@
+#header {
+    
+}
+#logo {
+  margin:0;
+  padding:8px;
+}
+#mainnav, #auxnav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#mainnav li, #auxnav li {
+    display: inline;
+    margin: 0;
+    padding: 0 10px;
+    border-right: 1px solid #333;
+}
+#mainnav li:first-child, #auxnav li:first-child {
+  padding: 0 10px 0 0;
+}
+#mainnav li:last-child, #auxnav li:last-child {
+  border-right: none;
+}
+.nav {
+  padding:10px;
+}
+.gray-back {
+  background-color: #eee; 
+}
+#content {
+  padding:20px;
+}
+#footer {
+  padding: 10px;
+  background-color: #eee;
+  color: #999;
+}

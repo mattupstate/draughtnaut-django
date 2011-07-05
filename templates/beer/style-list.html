@@ -1,0 +1,14 @@
+{% extends "default.html" %}
+{% block title %}All Beer Styles{% endblock %}
+{% block content %}
+  <h2>Beer Styles</h2>
+  {% if style_list %}
+    <ul>
+    {% for style in style_list %}
+      <li><a href="/beer/styles/{{ style.slug }}/">{{ style.name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no beer styles yet.</p>
+  {% endif %}
+{% endblock %}
