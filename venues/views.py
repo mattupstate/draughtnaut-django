@@ -1,8 +1,9 @@
-from django.utils import simplejson 
+from django import forms
 from django.http import Http404, HttpResponse
 from django.shortcuts import RequestContext, render_to_response
+from django.utils import simplejson 
 from venues.models import Venue, VenueType
-from beer.models import Beer
+from beer.models import Beer, BeerOnTap
 
 # Show all the venues in a list
 def venue_list(request):
@@ -23,6 +24,7 @@ def venue_detail(request, id_or_slug):
     return render_to_response('venues/venue-detail.html', { 
         'venue': venue,
         'beer_list': Beer.objects.filter(brewery=venue.id),
+        'beer_on_tap': BeerOnTap.objects.filter(venue=venue.id),
     }, context_instance=RequestContext(request))
 
 # Shows all the venue types in a list
@@ -53,3 +55,9 @@ def search_json(request):
     for venue in data:
         result.append({'id':venue.id, 'name':venue.name})
     return HttpResponse(simplejson.dumps(result), mimetype='application/json')
+
+class AddBeerOnTapForm(forms.Form):
+    venue = forms.IntegerField
+    beer = forms.IntegerField
+    beer_auto = forms.CharField(widget=forms.TextInput(attrs={'class':'text'}))
+    

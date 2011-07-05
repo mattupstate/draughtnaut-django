@@ -1,6 +1,7 @@
 {% extends "default.html" %}
 {% block title %}{{ venue.name }}{% endblock %}
 {% block content %}
+<div id="venue-id" style="display:none">{{ venue.id }}</div>
 <h2>{{ venue.name }}</h2>
 <p>
   {{ venue.address1 }}<br/>
@@ -9,12 +10,24 @@
   {{ venue.phone }}<br/>
   {{ venue.website }}<br/>
 </p>
-{% if beer_list %}
-<h3>Beer</h3>
+{% if beer_on_tap %}
+<h3>Beer On Tap Here</h3>
 <ul>
-{% for beer in beer_list %}
-  <li><a href="/beer/{{ beer.slug }}/">{{ beer.name }}</a></li>
+{% for ontap in beer_on_tap %}
+  <li><a href="/beer/{{ beer.slug }}/">{{ ontap.beer.name }}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
+{% if beer_list %}
+<h3>Beer Brewed Here</h3>
+<ul>
+{% for beer in beer_list %}
+  <li><a href="/beer/{{ beer.id }}/">{{ beer.name }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ STATIC_URL }}js/venue.js"></script>
 {% endblock %}

@@ -23,7 +23,7 @@ class Venue(models.Model):
     post_code = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     phone = models.CharField(max_length=20, null=True, blank=True)
-    website = models.CharField(max_length=100)
+    website = models.CharField(max_length=100, null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
     venue_type = models.ForeignKey(VenueType)
     foursquare_id = models.CharField(max_length=255, null=True, blank=True)
