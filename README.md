@@ -15,6 +15,7 @@ To run the application, rename the folder you cloned the repository into to 'dra
     python manage.py migrate venues
     python manage.py runserver
 
-
+## TODO
+Add sample data file to get up and running quickly
 
 
