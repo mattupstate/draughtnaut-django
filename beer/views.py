@@ -47,7 +47,6 @@ def beer_add(request):
     
     if request.method == 'POST':
         form = BeerForm(request.POST)
-        logging.debug(form.is_valid())
         if form.is_valid():
             b = Beer(name = form.cleaned_data['name'],
                      abv = form.cleaned_data['abv'],

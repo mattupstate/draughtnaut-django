@@ -4,7 +4,6 @@ from django.shortcuts import RequestContext, render_to_response
 from django.utils import simplejson 
 from venues.models import Venue, VenueType
 from beer.models import Beer, BeerOnTap
-import logging
 
 # Show all the venues in a list
 def venue_list(request):
