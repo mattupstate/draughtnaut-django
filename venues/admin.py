@@ -25,4 +25,4 @@ class VenueTypeAdmin(admin.ModelAdmin):
     
 admin.site.register(Venue, VenueAdmin)
 admin.site.register(VenueType, VenueTypeAdmin)
-admin.site.register(VenueTip)
+#admin.site.register(VenueTip)

@@ -12,4 +12,4 @@ class BeerAdmin(admin.ModelAdmin):
 
 admin.site.register(Beer, BeerAdmin)
 admin.site.register(BeerStyle, BeerStyleAdmin)
-admin.site.register(BeerOnTap)
+# admin.site.register(BeerOnTap)
