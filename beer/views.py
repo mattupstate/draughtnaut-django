@@ -92,3 +92,10 @@ def search_styles_json(request):
     for style in data:
         result.append({'id':style.id, 'name':style.name})
     return HttpResponse(simplejson.dumps(result), mimetype='application/json')
+
+def search_beer_json(request):
+    result = []
+    data = Beer.objects.filter(name__startswith=request.GET.get('name', ''))
+    for beer in data:
+        result.append({'id':beer.id, 'name':beer.name})
+    return HttpResponse(simplejson.dumps(result), mimetype='application/json')

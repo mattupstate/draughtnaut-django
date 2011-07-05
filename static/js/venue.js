@@ -1,31 +1,29 @@
 var lastBeerSelection;
-var defaultText = $('#id_beer_auto').val();
-var listItemTemplate = '<li id="beer-%id%"><a href="/beer/%id%">%name%</a> <button>X</button></li>';
-var ac = $('#id_beer_auto');
+var defaultText = $('#beer-autocomplete').val();
+var listItemTemplate = '<li id="beer-%id%"><a href="/beer/%id%">%name%</a> [<span class="remove-ontap"><a href="javascript:void(0)">remove</a></span>]</li>';
+var ac = $('#beer-autocomplete');
 var venueId = $('#venue-id').text();
-console.log(venueId)
-/*
+var csrfToken = $('#csrf-token').text()
+
 function removeBtnHandler(event) {
-  var beerId = $(this).parent().attr('id').replace('beer-',''); 
-  $.post('/venue/beer/remove"/>', {beer:beerId, venue:venueId}, handleRemoveBeer, "json");
+  var ontapId = $(this).parent().attr('id').replace('beer-',''); 
+  $.post('/venues/beer/remove/', { id:ontapId, csrfmiddlewaretoken:csrfToken }, handleRemoveBeer, "json");
 }
 function handleAddBeer(data) {
+  if(data.error) {
+    alert(data.error);
+    clearAutoComplete();
+    return;
+  }
   var str = listItemTemplate.replace(/%id%/g, data.id).replace(/%name%/g, data.name);
-  var node = $('#beer-list').append(str);
-  var btn = node.find('#beer-'+data.id+' button');
-  btn.button();
-  btn.click(removeBtnHandler);
-  clearAutoComplete();
-}
-function handleAddBeerError() {
-  alert('Venue is already serving ' + $('#beer-autocomplete').val());
+  $('#beer-list').append(str);
   clearAutoComplete();
 }
 function handleRemoveBeer(data) {
+  if(data.error) {
+    return;
+  }
   $('#beer-list #beer-'+data.id).remove();
-}
-function handleRemoveBeerError() {
-  
 }
 function resetAutoComplete() {
   ac.val(defaultText);
@@ -38,7 +36,7 @@ ac.focusout(resetAutoComplete);
 ac.autocomplete({
   source: function( request, response ) {
     $.ajax({
-      url: '<c:url value="/beer/search/json?name="/>'+request.term,
+      url: '/beer/search/json/?name='+request.term,
       success: function( data ) {
         response( $.map( data, function( item ) {
           return {
@@ -52,15 +50,17 @@ ac.autocomplete({
   },
   select: function( event, ui ) {
     if(ui.item) {
-      $.post('<c:url value="/venue/"/>${venue.id}/beer/add',{id:ui.item.id},handleAddBeer,'json');
+      $.post(
+        '/venues/beer/add/',
+        {venue_id:venueId, beer_id:ui.item.id, csrfmiddlewaretoken:csrfToken}, 
+        handleAddBeer, 
+        'json'
+      );
     }
   },
   minLength: 2
 });
 
-var btns = $('#beer-list button');
-btns.button();
-btns.bind('click', removeBtnHandler);
+$('.remove-ontap').live('click', removeBtnHandler);
 $('html .ui-autocomplete').css('max-height', '200px');
 $('html .ui-autocomplete').css('overflow-y', 'auto');
-*/

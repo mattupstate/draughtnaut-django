@@ -4,6 +4,7 @@ from django.shortcuts import RequestContext, render_to_response
 from django.utils import simplejson 
 from venues.models import Venue, VenueType
 from beer.models import Beer, BeerOnTap
+import logging
 
 # Show all the venues in a list
 def venue_list(request):
@@ -56,8 +57,53 @@ def search_json(request):
         result.append({'id':venue.id, 'name':venue.name})
     return HttpResponse(simplejson.dumps(result), mimetype='application/json')
 
-class AddBeerOnTapForm(forms.Form):
-    venue = forms.IntegerField
-    beer = forms.IntegerField
-    beer_auto = forms.CharField(widget=forms.TextInput(attrs={'class':'text'}))
+def add_beer_ontap(request):
+    if not request.user.is_authenticated():
+        return 
+    
+    try:
+        beer_id = request.POST.get('beer_id')
+        venue_id = request.POST.get('venue_id')
+    except:
+        return HttpResponse(simplejson.dumps({
+            'error':'Form error.'
+        }), mimetype='application/json')
+        
+    try:
+        BeerOnTap.objects.get(beer=beer_id, venue=venue_id)
+        return HttpResponse(simplejson.dumps({
+            'error':'This beer is already on tap here.'
+        }), mimetype='application/json')
+    except:
+        pass
+        
+    try:
+        b = Beer.objects.get(pk=beer_id)
+        v = Venue.objects.get(pk=venue_id)
+    except:
+        return HttpResponse(simplejson.dumps({
+            'error':'Invalid beer or venue.'
+        }), mimetype='application/json')
+    
+    ontap = BeerOnTap(added_by=request.user, beer=b, venue=v)
+    ontap.save()
+    
+    return HttpResponse(simplejson.dumps({
+        'id':ontap.id, 
+        'name':b.name
+    }), mimetype='application/json')
+    
+def remove_beer_ontap(request):
+    if not request.user.is_authenticated():
+        return 
+    
+    try:
+        ontap_id = request.POST.get('id')
+        BeerOnTap.objects.get(pk=ontap_id).delete()
+    except:
+        return HttpResponse(simplejson.dumps({
+            'error':'Form error or item does not exist.'
+        }), mimetype='application/json')
+    
+    return HttpResponse(simplejson.dumps({'id':ontap_id}), mimetype='application/json')
     

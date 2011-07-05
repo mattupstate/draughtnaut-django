@@ -6,6 +6,8 @@ urlpatterns = patterns('beer.views',
     (r'^$', 'beer_list'),
     # '/add/'
     (r'^add/$', 'beer_add'),
+    # '/search/json'
+    (r'^search/json/$', 'search_beer_json'),
     # '/styles/'
     (r'^styles/$', 'style_list'),
     # '/styles/search/json'

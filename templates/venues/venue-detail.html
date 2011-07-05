@@ -2,6 +2,7 @@
 {% block title %}{{ venue.name }}{% endblock %}
 {% block content %}
 <div id="venue-id" style="display:none">{{ venue.id }}</div>
+<div id="csrf-token" style="display:none">{{ csrf_token }}</div>
 <h2>{{ venue.name }}</h2>
 <p>
   {{ venue.address1 }}<br/>
@@ -10,14 +11,6 @@
   {{ venue.phone }}<br/>
   {{ venue.website }}<br/>
 </p>
-{% if beer_on_tap %}
-<h3>Beer On Tap Here</h3>
-<ul>
-{% for ontap in beer_on_tap %}
-  <li><a href="/beer/{{ beer.slug }}/">{{ ontap.beer.name }}</a></li>
-{% endfor %}
-</ul>
-{% endif %}
 {% if beer_list %}
 <h3>Beer Brewed Here</h3>
 <ul>
@@ -26,6 +19,16 @@
 {% endfor %}
 </ul>
 {% endif %}
+
+<h3>Beer On Tap Here</h3>
+{% if user.is_authenticated %}<p>Add <input id="beer-autocomplete" value="Search Beers..." type="text" class="text"/></p>{% endif %}
+<ul id="beer-list">
+{% if beer_on_tap %}
+{% for ontap in beer_on_tap %}
+  <li id="beer-{{ ontap.id }}"><a href="/beer/{{ ontap.beer.id }}/">{{ ontap.beer.name }}</a> {% if user.is_authenticated %}[<span class="remove-ontap"><a href="javascript:void(0)">remove</a></span>]{% endif %}</li>
+{% endfor %}
+{% endif %}
+</ul>
 {% endblock %}
 
 {% block scripts %}
