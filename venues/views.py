@@ -57,53 +57,47 @@ def search_json(request):
         result.append({'id':venue.id, 'name':venue.name})
     return HttpResponse(simplejson.dumps(result), mimetype='application/json')
 
+# Add a beer on tap
 def add_beer_ontap(request):
     if not request.user.is_authenticated():
-        return 
-    
+        return
+     
+    result = {}
     try:
         beer_id = request.POST.get('beer_id')
         venue_id = request.POST.get('venue_id')
     except:
-        return HttpResponse(simplejson.dumps({
-            'error':'Form error.'
-        }), mimetype='application/json')
+        result = { 'error':'Form error.' }
         
     try:
         BeerOnTap.objects.get(beer=beer_id, venue=venue_id)
-        return HttpResponse(simplejson.dumps({
-            'error':'This beer is already on tap here.'
-        }), mimetype='application/json')
+        result = { 'error':'This beer is already on tap here.' }
     except:
         pass
         
     try:
         b = Beer.objects.get(pk=beer_id)
         v = Venue.objects.get(pk=venue_id)
+        ontap = BeerOnTap(added_by=request.user, beer=b, venue=v)
+        ontap.save()
+        result = { 'id':ontap.id, 'name':b.name }
     except:
-        return HttpResponse(simplejson.dumps({
-            'error':'Invalid beer or venue.'
-        }), mimetype='application/json')
+        result = { 'error':'Invalid beer or venue.' }
     
-    ontap = BeerOnTap(added_by=request.user, beer=b, venue=v)
-    ontap.save()
+    return HttpResponse(simplejson.dumps(result), mimetype='application/json')
     
-    return HttpResponse(simplejson.dumps({
-        'id':ontap.id, 
-        'name':b.name
-    }), mimetype='application/json')
-    
+# Remove a beer on tap
 def remove_beer_ontap(request):
     if not request.user.is_authenticated():
         return 
     
+    result = {}
     try:
         ontap_id = request.POST.get('id')
         BeerOnTap.objects.get(pk=ontap_id).delete()
+        result = { 'id':ontap_id }
     except:
-        return HttpResponse(simplejson.dumps({
-            'error':'Form error or item does not exist.'
-        }), mimetype='application/json')
+        result = { 'error':'Form error or item does not exist.' }
     
-    return HttpResponse(simplejson.dumps({'id':ontap_id}), mimetype='application/json')
+    return HttpResponse(simplejson.dumps(result), mimetype='application/json')
     
