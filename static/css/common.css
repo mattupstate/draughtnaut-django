@@ -36,6 +36,13 @@
   background-color: #eee;
   color: #999;
 }
+#footer a {
+  color:#666;
+}
+#footer a:hover {
+  color: #555;
+  text-decoration: none;
+}
 .remove-ontap {
   
 }
