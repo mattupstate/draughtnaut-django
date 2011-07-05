@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     (r'^$', 'home.views.index'),
     (r'^beer/', include('beer.urls')),
     (r'^venues/', include('venues.urls')),
-    #(r'^users/login/$', 'django.contrib.auth.views.login', {'template_name': 'users/login.html'}),
     (r'^users/', include('users.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
