@@ -1,6 +1,6 @@
 # DraughtNaut
 
-DraughtNaut is a hypothetical website concept I use to learn new languages and frameworks. In this case, Python and Django
+DraughtNaut is a website I use to learn new languages and frameworks. In this case, Python and Django
 
 You must have Django, and South installed for this application to run properly. To install Django visit the [Django website](https://docs.djangoproject.com/en/dev/topics/install/).
 
