@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, RequestContext
 from django.utils.translation import ugettext_lazy as _
+import logging
 
 def index(request):
     if not request.user.is_authenticated():
@@ -15,15 +16,21 @@ def login_user(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/')
     
-    form = AuthenticationForm(None, request.POST or None)
-    next = request.GET.get('next', '/')
-    
-    if form.is_valid():
-        login(request, form.get_user())
-        return HttpResponseRedirect(next)
+    if request.method == "POST":
+        form = AuthenticationForm(None, request.POST or None)
+        next = request.POST.get('next', '/')
+        logging.debug('NEXT URL=%s' % next)
         
+        if form.is_valid():
+            login(request, form.get_user())
+            return HttpResponseRedirect(next)
+    else:
+        form = AuthenticationForm()
+        next = request.GET.get('next', '/')
+            
     return render_to_response('users/login.html', {
-        'form': form
+        'form': form,
+        'next': next,
     }, context_instance=RequestContext(request))
 
 def logout_user(request):
