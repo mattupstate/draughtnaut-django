@@ -1,0 +1,10 @@
+{% extends "default.html" %}
+{% block title %}Profile: {{ profile.user.username {% endblock %}
+{% block content %}
+<img src="{{ gravatar_url }}"/>
+<h2>{{ profile.user.username }}</h2>
+
+<h3>Tips</h3>
+<p>Tips added by user</p>
+
+{% endblock %}
