@@ -1,10 +1,6 @@
-import logging
 import os
 
 dirname = os.path.dirname(globals()["__file__"])
-logging.basicConfig(level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(message)s',
-)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -36,7 +32,7 @@ MEDIA_URL = ''
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-LOGIN_REDIRECT_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/login/'
 
 STATICFILES_DIRS = (
     os.path.join(dirname, 'static'),
@@ -77,6 +73,10 @@ TEMPLATE_DIRS = (
     os.path.join(dirname, 'templates'),
 )
 
+FIXTURE_DIRS = (
+    os.path.join(dirname, 'fixtures'),
+)
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -86,10 +86,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'south',
-    'home',
     'beer',
-    'venues',
+    'beerontap',
+    'main',
+    'moderation',
     'users',
+    'venues',
 )
 
 LOGGING = {
@@ -110,4 +112,4 @@ LOGGING = {
     }
 }
 
-AUTH_PROFILE_MODULE = 'users.DraughtnautUser'
+AUTH_PROFILE_MODULE = 'users.DraughtNautUser'

@@ -1,45 +1,45 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from moderation.mixins import ModerationMixin
+from moderation.models import ModerationManager
+from utils.mixins import TimestampMixin
+from venues.models import Venue
 
 # Beer Style model
 class BeerStyle(models.Model):
-    slug = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=50)
-    description = models.TextField(null=True, blank=True)
-    parent = models.ForeignKey('self', null=True, blank=True)
+    description = models.TextField(blank=True)
+    
+    # Relationships
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
     
     def __unicode__(self):
         return self.name
     
     class Meta:
         verbose_name_plural = "Beer Styles"
-    
+        ordering = ['name']
+        
+class BeerManager(ModerationManager):
+    pass
+        
 # Beer model
-class Beer(models.Model):    
+class Beer(TimestampMixin, ModerationMixin):    
     name = models.CharField(max_length=100)
     abv = models.DecimalField(decimal_places=2,max_digits=4)
-    style = models.ForeignKey(BeerStyle)
-    brewery = models.ForeignKey('venues.Venue')
-    retired = models.BooleanField()
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    retired = models.BooleanField(default=False)
     
+    # Relationships
+    style = models.ForeignKey(BeerStyle, related_name='beers')
+    brewery = models.ForeignKey(Venue, related_name='beer_brewed_here')
+    contributed_by = models.ForeignKey(User, related_name='contributed_beers', null=True, blank=True, on_delete=models.SET_NULL) 
+    
+    objects = BeerManager() 
+    
+    # Custom Manager
     def __unicode__(self):
         return self.name
     
     class Meta:
         verbose_name_plural = "Beer"
-
-# Beer on tap model
-class BeerOnTap(models.Model):
-    note = models.CharField(max_length=140)
-    added_by = models.ForeignKey(User)
-    beer = models.ForeignKey(Beer)
-    venue = models.ForeignKey('venues.Venue')
-    created = models.DateTimeField(auto_now_add=True)
-    
-    def __unicode__(self):
-        return self.beer, ': ', self.addedBy.name
-    
-    class Meta:
-        verbose_name_plural = "Beer on Tap"
+        ordering = ['brewery', 'name']

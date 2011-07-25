@@ -8,38 +8,20 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'BeerStyle'
-        db.create_table('beer_beerstyle', (
+        # Adding model 'UserProfile'
+        db.create_table('users_userprofile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['beer.BeerStyle'], null=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(related_name='profile', unique=True, to=orm['auth.User'])),
+            ('favorite_beer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['beer.Beer'], null=True)),
+            ('favorite_venue', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['venues.Venue'], null=True)),
         ))
-        db.send_create_signal('beer', ['BeerStyle'])
-
-        # Adding model 'Beer'
-        db.create_table('beer_beer', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('date_modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('date_approved', self.gf('django.db.models.fields.DateTimeField')(null=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('abv', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=2)),
-            ('retired', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('style', self.gf('django.db.models.fields.related.ForeignKey')(default=0, related_name='beers', null=True, blank=True, to=orm['beer.BeerStyle'])),
-            ('brewery', self.gf('django.db.models.fields.related.ForeignKey')(related_name='beer_brewed_here', to=orm['venues.Venue'])),
-            ('contributed_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='contributed_beers', null=True, to=orm['auth.User'])),
-        ))
-        db.send_create_signal('beer', ['Beer'])
+        db.send_create_signal('users', ['UserProfile'])
 
 
     def backwards(self, orm):
         
-        # Deleting model 'BeerStyle'
-        db.delete_table('beer_beerstyle')
-
-        # Deleting model 'Beer'
-        db.delete_table('beer_beer')
+        # Deleting model 'UserProfile'
+        db.delete_table('users_userprofile')
 
 
     models = {
@@ -109,6 +91,13 @@ class Migration(SchemaMigration):
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
             'reason': ('django.db.models.fields.TextField', [], {})
         },
+        'users.userprofile': {
+            'Meta': {'object_name': 'UserProfile'},
+            'favorite_beer': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['beer.Beer']", 'null': 'True'}),
+            'favorite_venue': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['venues.Venue']", 'null': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'profile'", 'unique': 'True', 'to': "orm['auth.User']"})
+        },
         'venues.venue': {
             'Meta': {'object_name': 'Venue'},
             'address1': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -137,4 +126,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['beer']
+    complete_apps = ['users']

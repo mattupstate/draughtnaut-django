@@ -1,19 +1,17 @@
-# This also imports the include function
-from django.conf.urls.defaults import patterns
+from django.conf.urls.defaults import patterns, url
+from beer import views
 
 urlpatterns = patterns('beer.views',
     # '/'
-    (r'^$', 'beer_list'),
-    # '/add/'
-    (r'^add/$', 'beer_add'),
-    # '/search/json'
-    (r'^search/json/$', 'search_beer_json'),
+    url('^$', views.beer_index, name='beer-index'),
+    # '/<id>/'
+    url('^(?P<id>[\d]+)/$', views.beer_show),
+    # '/search/'
+    url('^search/$', views.beer_search),
     # '/styles/'
-    (r'^styles/$', 'style_list'),
-    # '/styles/search/json'
-    (r'^styles/search/json$', 'search_styles_json'),
-    # '/<id_or_slug>'
-    (r'^(?P<id_or_slug>[\w-]+)/$', 'beer_detail'),
-    # '/styles/<id_or_slug>'
-    (r'^styles/(?P<id_or_slug>[\w-]+)/$', 'style_detail'),
+    url('^styles/$', views.styles_index),
+    # '/styles/<id>/'
+    url('^styles/(?P<id>[\d]+)/$', views.styles_show),
+    # '/styles/search'
+    url('^styles/search$', views.styles_search),
 )

@@ -1,0 +1,62 @@
+[
+  {
+    "pk": 4, 
+    "model": "moderation.moderationflag", 
+    "fields": {
+      "flagged_by": 2, 
+      "date_modified": "2011-07-24 20:07:52", 
+      "object_id": 1, 
+      "reason": "inappropriate", 
+      "content_type": [
+        "venues", 
+        "venue"
+      ], 
+      "date_created": "2011-07-24 20:07:52"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "moderation.moderationflag", 
+    "fields": {
+      "flagged_by": 3, 
+      "date_modified": "2011-07-24 20:07:38", 
+      "object_id": 1, 
+      "reason": "duplicate", 
+      "content_type": [
+        "beer", 
+        "beer"
+      ], 
+      "date_created": "2011-07-24 20:07:38"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "moderation.moderationflag", 
+    "fields": {
+      "flagged_by": 2, 
+      "date_modified": "2011-07-24 20:06:46", 
+      "object_id": 1, 
+      "reason": "inappropriate", 
+      "content_type": [
+        "venues", 
+        "venue"
+      ], 
+      "date_created": "2011-07-24 20:06:46"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "moderation.moderationflag", 
+    "fields": {
+      "flagged_by": 3, 
+      "date_modified": "2011-07-24 20:06:38", 
+      "object_id": 1, 
+      "reason": "duplicate", 
+      "content_type": [
+        "beer", 
+        "beer"
+      ], 
+      "date_created": "2011-07-24 20:06:38"
+    }
+  }
+]

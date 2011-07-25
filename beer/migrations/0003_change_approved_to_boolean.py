@@ -8,38 +8,20 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'BeerStyle'
-        db.create_table('beer_beerstyle', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['beer.BeerStyle'], null=True, blank=True)),
-        ))
-        db.send_create_signal('beer', ['BeerStyle'])
+        # Deleting field 'Beer.date_approved'
+        db.delete_column('beer_beer', 'date_approved')
 
-        # Adding model 'Beer'
-        db.create_table('beer_beer', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('date_modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('date_approved', self.gf('django.db.models.fields.DateTimeField')(null=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('abv', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=2)),
-            ('retired', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('style', self.gf('django.db.models.fields.related.ForeignKey')(default=0, related_name='beers', null=True, blank=True, to=orm['beer.BeerStyle'])),
-            ('brewery', self.gf('django.db.models.fields.related.ForeignKey')(related_name='beer_brewed_here', to=orm['venues.Venue'])),
-            ('contributed_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='contributed_beers', null=True, to=orm['auth.User'])),
-        ))
-        db.send_create_signal('beer', ['Beer'])
+        # Adding field 'Beer.approved'
+        db.add_column('beer_beer', 'approved', self.gf('django.db.models.fields.BooleanField')(default=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Deleting model 'BeerStyle'
-        db.delete_table('beer_beerstyle')
+        # Adding field 'Beer.date_approved'
+        db.add_column('beer_beer', 'date_approved', self.gf('django.db.models.fields.DateTimeField')(null=True), keep_default=False)
 
-        # Deleting model 'Beer'
-        db.delete_table('beer_beer')
+        # Deleting field 'Beer.approved'
+        db.delete_column('beer_beer', 'approved')
 
 
     models = {
@@ -73,20 +55,20 @@ class Migration(SchemaMigration):
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         'beer.beer': {
-            'Meta': {'object_name': 'Beer'},
+            'Meta': {'ordering': "['brewery', 'name']", 'object_name': 'Beer'},
             'abv': ('django.db.models.fields.DecimalField', [], {'max_digits': '4', 'decimal_places': '2'}),
+            'approved': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'brewery': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'beer_brewed_here'", 'to': "orm['venues.Venue']"}),
             'contributed_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'contributed_beers'", 'null': 'True', 'to': "orm['auth.User']"}),
-            'date_approved': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'retired': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'style': ('django.db.models.fields.related.ForeignKey', [], {'default': '0', 'related_name': "'beers'", 'null': 'True', 'blank': 'True', 'to': "orm['beer.BeerStyle']"})
+            'style': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'beers'", 'to': "orm['beer.BeerStyle']"})
         },
         'beer.beerstyle': {
-            'Meta': {'object_name': 'BeerStyle'},
+            'Meta': {'ordering': "['name']", 'object_name': 'BeerStyle'},
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
@@ -107,31 +89,31 @@ class Migration(SchemaMigration):
             'flagged_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'moderation_flags'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'reason': ('django.db.models.fields.TextField', [], {})
+            'reason': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         'venues.venue': {
-            'Meta': {'object_name': 'Venue'},
+            'Meta': {'ordering': "['name']", 'object_name': 'Venue'},
             'address1': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'address2': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
+            'approved': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'city': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'contributed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'contributed_venues'", 'to': "orm['auth.User']"}),
+            'contributed_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'contributed_venues'", 'null': 'True', 'to': "orm['auth.User']"}),
             'country': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'date_approved': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lat': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8'}),
-            'lon': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8'}),
+            'lat': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8', 'blank': 'True'}),
+            'lon': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'notes': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
             'post_code': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'venue_type': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'venues'", 'to': "orm['venues.VenueType']"}),
+            'venue_types': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'venues'", 'symmetrical': 'False', 'to': "orm['venues.VenueType']"}),
             'website': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'})
         },
         'venues.venuetype': {
-            'Meta': {'object_name': 'VenueType'},
+            'Meta': {'ordering': "['name']", 'object_name': 'VenueType'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         }

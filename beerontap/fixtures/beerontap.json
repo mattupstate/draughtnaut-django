@@ -1,0 +1,67 @@
+[
+  {
+    "pk": 5, 
+    "model": "beerontap.beerontap", 
+    "fields": {
+      "comment": "", 
+      "date_modified": "2011-07-24 18:04:35", 
+      "date_removed": null, 
+      "venue": 3, 
+      "beer": 3, 
+      "date_created": "2011-07-24 18:04:35", 
+      "added_by": 3
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "beerontap.beerontap", 
+    "fields": {
+      "comment": "", 
+      "date_modified": "2011-07-24 18:04:25", 
+      "date_removed": null, 
+      "venue": 1, 
+      "beer": 6, 
+      "date_created": "2011-07-24 18:04:25", 
+      "added_by": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "beerontap.beerontap", 
+    "fields": {
+      "comment": "", 
+      "date_modified": "2011-07-24 18:04:13", 
+      "date_removed": null, 
+      "venue": 5, 
+      "beer": 5, 
+      "date_created": "2011-07-24 18:04:13", 
+      "added_by": 3
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "beerontap.beerontap", 
+    "fields": {
+      "comment": "I love cream ales", 
+      "date_modified": "2011-07-24 18:21:13", 
+      "date_removed": "2011-07-24 18:21:11", 
+      "venue": 5, 
+      "beer": 4, 
+      "date_created": "2011-07-24 18:03:26", 
+      "added_by": 2
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "beerontap.beerontap", 
+    "fields": {
+      "comment": "Sweet beer", 
+      "date_modified": "2011-07-24 18:21:22", 
+      "date_removed": "2011-07-24 18:21:20", 
+      "venue": 1, 
+      "beer": 1, 
+      "date_created": "2011-07-24 18:02:45", 
+      "added_by": 3
+    }
+  }
+]

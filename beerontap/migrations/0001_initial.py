@@ -8,38 +8,24 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'BeerStyle'
-        db.create_table('beer_beerstyle', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['beer.BeerStyle'], null=True, blank=True)),
-        ))
-        db.send_create_signal('beer', ['BeerStyle'])
-
-        # Adding model 'Beer'
-        db.create_table('beer_beer', (
+        # Adding model 'BeerOnTap'
+        db.create_table('beerontap_beerontap', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('date_modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('date_approved', self.gf('django.db.models.fields.DateTimeField')(null=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('abv', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=2)),
-            ('retired', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('style', self.gf('django.db.models.fields.related.ForeignKey')(default=0, related_name='beers', null=True, blank=True, to=orm['beer.BeerStyle'])),
-            ('brewery', self.gf('django.db.models.fields.related.ForeignKey')(related_name='beer_brewed_here', to=orm['venues.Venue'])),
-            ('contributed_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='contributed_beers', null=True, to=orm['auth.User'])),
+            ('date_removed', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('comment', self.gf('django.db.models.fields.TextField')()),
+            ('added_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='beer_on_tap', to=orm['auth.User'])),
+            ('beer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='on_tap_at', to=orm['beer.Beer'])),
+            ('venue', self.gf('django.db.models.fields.related.ForeignKey')(related_name='beer_on_tap_here', to=orm['venues.Venue'])),
         ))
-        db.send_create_signal('beer', ['Beer'])
+        db.send_create_signal('beerontap', ['BeerOnTap'])
 
 
     def backwards(self, orm):
         
-        # Deleting model 'BeerStyle'
-        db.delete_table('beer_beerstyle')
-
-        # Deleting model 'Beer'
-        db.delete_table('beer_beer')
+        # Deleting model 'BeerOnTap'
+        db.delete_table('beerontap_beerontap')
 
 
     models = {
@@ -92,6 +78,17 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['beer.BeerStyle']", 'null': 'True', 'blank': 'True'})
         },
+        'beerontap.beerontap': {
+            'Meta': {'object_name': 'BeerOnTap'},
+            'added_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'beer_on_tap'", 'to': "orm['auth.User']"}),
+            'beer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'on_tap_at'", 'to': "orm['beer.Beer']"}),
+            'comment': ('django.db.models.fields.TextField', [], {}),
+            'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'date_removed': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'venue': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'beer_on_tap_here'", 'to': "orm['venues.Venue']"})
+        },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
             'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -137,4 +134,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['beer']
+    complete_apps = ['beerontap']

@@ -8,38 +8,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'BeerStyle'
-        db.create_table('beer_beerstyle', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['beer.BeerStyle'], null=True, blank=True)),
-        ))
-        db.send_create_signal('beer', ['BeerStyle'])
-
-        # Adding model 'Beer'
-        db.create_table('beer_beer', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('date_modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('date_approved', self.gf('django.db.models.fields.DateTimeField')(null=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('abv', self.gf('django.db.models.fields.DecimalField')(max_digits=4, decimal_places=2)),
-            ('retired', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('style', self.gf('django.db.models.fields.related.ForeignKey')(default=0, related_name='beers', null=True, blank=True, to=orm['beer.BeerStyle'])),
-            ('brewery', self.gf('django.db.models.fields.related.ForeignKey')(related_name='beer_brewed_here', to=orm['venues.Venue'])),
-            ('contributed_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='contributed_beers', null=True, to=orm['auth.User'])),
-        ))
-        db.send_create_signal('beer', ['Beer'])
+        # Changing field 'Beer.style'
+        db.alter_column('beer_beer', 'style_id', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['beer.BeerStyle']))
 
 
     def backwards(self, orm):
         
-        # Deleting model 'BeerStyle'
-        db.delete_table('beer_beerstyle')
-
-        # Deleting model 'Beer'
-        db.delete_table('beer_beer')
+        # Changing field 'Beer.style'
+        db.alter_column('beer_beer', 'style_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['beer.BeerStyle']))
 
 
     models = {
@@ -83,7 +59,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'retired': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'style': ('django.db.models.fields.related.ForeignKey', [], {'default': '0', 'related_name': "'beers'", 'null': 'True', 'blank': 'True', 'to': "orm['beer.BeerStyle']"})
+            'style': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'beers'", 'to': "orm['beer.BeerStyle']"})
         },
         'beer.beerstyle': {
             'Meta': {'object_name': 'BeerStyle'},
@@ -114,14 +90,14 @@ class Migration(SchemaMigration):
             'address1': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'address2': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'city': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'contributed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'contributed_venues'", 'to': "orm['auth.User']"}),
+            'contributed_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'contributed_venues'", 'null': 'True', 'to': "orm['auth.User']"}),
             'country': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'date_approved': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lat': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8'}),
-            'lon': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8'}),
+            'lat': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8', 'blank': 'True'}),
+            'lon': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '11', 'decimal_places': '8', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'notes': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),

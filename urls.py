@@ -1,15 +1,14 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from main.views import main_index
 
 # Enable admin
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', 'home.views.index'),
+    url(r'^$', main_index, name='main-index'),
     (r'^beer/', include('beer.urls')),
-    (r'^venues/', include('venues.urls')),
-    (r'^users/', include('users.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 

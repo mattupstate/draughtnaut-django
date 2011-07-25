@@ -1,0 +1,303 @@
+[
+  {
+    "pk": 2, 
+    "model": "venues.venuetype", 
+    "fields": {
+      "name": "Bar"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "venues.venuetype", 
+    "fields": {
+      "name": "Brewery"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "venues.venuetype", 
+    "fields": {
+      "name": "Eatery"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Brooklyn", 
+      "post_code": "11231", 
+      "name": "Bar Great Harry", 
+      "date_modified": "2011-07-24 18:12:53", 
+      "address1": "280 Smith Street", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "New York", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 17:54:39", 
+      "venue_types": [
+        2
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Brooklyn", 
+      "post_code": "11215", 
+      "name": "Beer Table ", 
+      "date_modified": "2011-07-24 18:12:48", 
+      "address1": "427 B 7th Avenue", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "New York", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 17:36:46", 
+      "venue_types": [
+        2, 
+        3
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Kalamazoo", 
+      "post_code": "49007", 
+      "name": "Bell's Brewery, Inc. ", 
+      "date_modified": "2011-07-24 18:17:35", 
+      "address1": "355 E. Kalamazoo Ave.", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "Michigan", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 18:17:35", 
+      "venue_types": [
+        1
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "San Francisco", 
+      "post_code": "94117", 
+      "name": "Bistro Gambrinus", 
+      "date_modified": "2011-07-24 18:14:58", 
+      "address1": "1813 Fulton St.", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "California", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 18:14:58", 
+      "venue_types": [
+        2, 
+        3
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Chicago", 
+      "post_code": "60647", 
+      "name": "Map Room", 
+      "date_modified": "2011-07-24 18:16:06", 
+      "address1": "1949 N. Hoyne", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "Illinois", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 18:16:06", 
+      "venue_types": [
+        2
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Brooklyn", 
+      "post_code": "11215", 
+      "name": "Mission Delores", 
+      "date_modified": "2011-07-24 18:12:42", 
+      "address1": "249 4th Ave", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "New York", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 17:35:22", 
+      "venue_types": [
+        2
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Santa Rosa", 
+      "post_code": "95404", 
+      "name": "Russian River Brewing Company ", 
+      "date_modified": "2011-07-24 18:18:23", 
+      "address1": "725 4th St.", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "California", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 18:18:23", 
+      "venue_types": [
+        2, 
+        1, 
+        3
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Chico", 
+      "post_code": "95928", 
+      "name": "Sierra Nevada Brewing Co.", 
+      "date_modified": "2011-07-24 17:54:23", 
+      "address1": "1075 E. 20th Street", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "California", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 17:35:31", 
+      "venue_types": [
+        1
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Brooklyn", 
+      "post_code": "11231", 
+      "name": "Sixpoint", 
+      "date_modified": "2011-07-24 18:12:38", 
+      "address1": "40 Van Dyke St", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "New York", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 17:39:17", 
+      "venue_types": [
+        1
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "Chicago", 
+      "post_code": "60607", 
+      "name": "The Publican", 
+      "date_modified": "2011-07-24 18:16:39", 
+      "address1": "845 W. Fulton Market", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "Illinois", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 18:16:39", 
+      "venue_types": [
+        2, 
+        3
+      ], 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "venues.venue", 
+    "fields": {
+      "website": "", 
+      "city": "San Francisco", 
+      "post_code": "94117", 
+      "name": "Toronado", 
+      "date_modified": "2011-07-24 18:14:02", 
+      "address1": "547 Haight St.", 
+      "address2": "", 
+      "lon": null, 
+      "phone": "", 
+      "state": "California", 
+      "contributed_by": null, 
+      "notes": "", 
+      "country": "United States", 
+      "lat": null, 
+      "date_created": "2011-07-24 18:14:02", 
+      "venue_types": [
+        2
+      ], 
+      "approved": true
+    }
+  }
+]

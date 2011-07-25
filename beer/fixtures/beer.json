@@ -1,0 +1,230 @@
+[
+  {
+    "pk": 1, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Ale", 
+      "parent": null, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "American Barleywine", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "American IPA", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "American Pale Wheat Ale", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "American Stout", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Belgian Dark Ale", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Belgian Strong Pale Ale", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Bock", 
+      "parent": 2, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Cream Ale", 
+      "parent": 1, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "German Pilsener", 
+      "parent": 2, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Lager", 
+      "parent": null, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "beer.beerstyle", 
+    "fields": {
+      "name": "Vienna Lager", 
+      "parent": 2, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 14, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Bell's Oberon Ale", 
+      "date_modified": "2011-07-24 19:57:51", 
+      "brewery": 10, 
+      "abv": "5.8", 
+      "date_created": "2011-07-24 18:20:31", 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 13, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Damnation", 
+      "date_modified": "2011-07-24 18:19:49", 
+      "brewery": 11, 
+      "abv": "7.75", 
+      "date_created": "2011-07-24 18:19:49", 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 5, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Sierra Nevada Bigfoot Barleywine Style Ale", 
+      "date_modified": "2011-07-24 17:38:06", 
+      "brewery": 2, 
+      "abv": "9.6", 
+      "date_created": "2011-07-24 17:38:06", 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 6, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Sierra Nevada Celebration Ale", 
+      "date_modified": "2011-07-24 17:38:33", 
+      "brewery": 2, 
+      "abv": "6.8", 
+      "date_created": "2011-07-24 17:38:33", 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 6, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Sierra Nevada Harvest Wet Hop Ale", 
+      "date_modified": "2011-07-24 20:05:31", 
+      "brewery": 2, 
+      "abv": "6.7", 
+      "date_created": "2011-07-24 17:37:46", 
+      "approved": false
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 6, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Bengali Tiger", 
+      "date_modified": "2011-07-24 17:43:26", 
+      "brewery": 4, 
+      "abv": "6.4", 
+      "date_created": "2011-07-24 17:43:26", 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 7, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Sehr Crisp Pilsner", 
+      "date_modified": "2011-07-24 17:40:56", 
+      "brewery": 4, 
+      "abv": "5.4", 
+      "date_created": "2011-07-24 17:40:56", 
+      "approved": true
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "beer.beer", 
+    "fields": {
+      "style": 12, 
+      "contributed_by": null, 
+      "retired": false, 
+      "name": "Sweet Action", 
+      "date_modified": "2011-07-24 17:40:38", 
+      "brewery": 4, 
+      "abv": "5.2", 
+      "date_created": "2011-07-24 17:40:38", 
+      "approved": true
+    }
+  }
+]
